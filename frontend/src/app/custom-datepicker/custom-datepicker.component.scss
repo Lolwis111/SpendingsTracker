@@ -1,0 +1,80 @@
+.wrapper
+{
+    display: grid;
+    grid-template-areas:
+        'left start end right';
+    gap: 10px;
+}
+
+.element
+{
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.btn_left
+{
+    grid-area: left;
+}
+
+.btn_right
+{
+    grid-area: right;
+}
+
+.date_start
+{
+    grid-area: start;
+}
+
+.date_end
+{
+    grid-area: end;
+}
+
+.inputelement 
+{
+    width: 100%;
+    min-width: 150px;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbutton
+{
+    width: 50px;
+    height: 56px;
+}
+
+td
+{
+    text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .wrapper
+    {
+        grid-template-areas: 
+            'start start'
+            'end end'
+            'left right'
+    }
+
+    .element
+    {
+        width: 100%;
+
+        .navbutton
+        {
+            width: 90%;
+            height: inherit;
+        }
+    }
+
+
+    .inputelement
+    {
+        width: 100%;
+    }
+}

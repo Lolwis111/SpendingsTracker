@@ -1,0 +1,53 @@
+<div>
+
+    <h1>Neue Rechnung</h1>
+
+    <table>
+
+        <tr class="formrow">
+            <td>
+                <mat-form-field class="inputelement">
+                    <mat-label>Beschreibung</mat-label>
+                    <textarea matInput required [(ngModel)]="description"></textarea>
+                </mat-form-field>            
+            </td>
+        </tr>
+
+        <tr class="formrow">
+            <td>
+                <mat-form-field class="inputelement">
+                    <mat-label>Betrag</mat-label>
+                    <input type="number" matInput required [(ngModel)]="amount">
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr class="formrow">
+            <td>
+                <mat-radio-group class="inputelement">
+                    <mat-radio-button [value]="'Cash'" class="radio-button" (change)="onRadioChange($event)" checked>Bar</mat-radio-button>
+                    <mat-radio-button [value]="'Card'" class="radio-button" (change)="onRadioChange($event)">Karte</mat-radio-button>
+                    <mat-radio-button [value]="'SEPA'" class="radio-button" (change)="onRadioChange($event)">SEPA</mat-radio-button>
+                </mat-radio-group>
+            </td>
+        </tr>
+
+        <tr class="formrow">
+            <td>
+                <mat-form-field class="inputelement">
+                    <input matInput [matDatepicker]="datePicker" placeholder="Datum" required>
+                    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datePicker></mat-datepicker>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr class="formrow">
+            <td>
+                <button class="inputelement" mat-raised-button (click)="insert()">Einfügen</button>
+            </td>
+        </tr>
+
+    </table>
+
+</div>

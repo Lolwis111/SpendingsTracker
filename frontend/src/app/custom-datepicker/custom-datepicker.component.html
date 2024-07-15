@@ -1,0 +1,31 @@
+<div class="wrapper">
+
+    <div class="btn_left element">
+        <button mat-icon-button class="navbutton" (click)="goBackward()">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+    </div>
+    
+    <div class="date_start element">
+        <mat-form-field class="inputelement">
+            <input matInput [matDatepicker]="startPicker" placeholder="start date" (dateChange)="startChange($event)" [value]="startDate">
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="date_end element">
+        <mat-form-field class="inputelement">
+            <input matInput [matDatepicker]="endPicker" placeholder="end date" (dateChange)="endChange($event)" [value]="endDate">
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="btn_right element">
+        <button mat-icon-button class="navbutton" (click)="goForward()">
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+    </div>
+</div>
+    

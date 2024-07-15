@@ -1,0 +1,32 @@
+.inputelement
+{
+    width: 400px;
+}
+
+.formrow
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+h1
+{
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+    table
+    {
+        width: 100%;
+    }
+    
+    .inputelement
+    {
+        width: 100%;
+    }
+
+    .formrow
+    {
+        width: 100%;
+    }
+}

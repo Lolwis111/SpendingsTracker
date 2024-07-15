@@ -1,0 +1,15 @@
+<div class="wrapper">
+
+    <div class="sidebyside left">
+        <app-custom-datepicker (onSelection)="paymentViewer.refresh($event)"></app-custom-datepicker>
+        <app-payment-viewer #paymentViewer></app-payment-viewer>
+    </div>
+        
+    <div class="sidebyside right">
+        <app-payment-inserter class="right"></app-payment-inserter>
+
+    </div>
+
+    <router-outlet />
+
+</div>
