@@ -14,7 +14,7 @@ import { PaymentInserterComponent } from "./payment-inserter/payment-inserter.co
     CustomDatepickerComponent,
     CommonModule,
     PaymentInserterComponent
-],
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

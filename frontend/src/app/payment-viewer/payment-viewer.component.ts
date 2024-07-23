@@ -1,10 +1,12 @@
 import { MatTableModule } from '@angular/material/table';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import  { DatePipe, formatDate, CurrencyPipe } from '@angular/common';
+import  { DatePipe, formatDate, CurrencyPipe, CommonModule } from '@angular/common';
 import { LOCALE_ID, Inject } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { environment } from '../../environment/environment';
+import { DateAdapter } from '@angular/material/core';
 
 export interface BankingItem
 {
@@ -24,16 +26,18 @@ export interface BankingItem
     MatToolbar,
     MatPaginator,
     DatePipe,
-    CurrencyPipe
+    CurrencyPipe,
+    CommonModule
   ],
   templateUrl: './payment-viewer.component.html',
   styleUrl: './payment-viewer.component.scss'
 })
 export class PaymentViewerComponent implements OnInit {
 
-  constructor(private http: HttpClient, @Inject(LOCALE_ID) private locale: string) 
+  constructor(private http: HttpClient, @Inject(LOCALE_ID) private locale: string, private dateAdapter: DateAdapter<Date>) 
   {
     this.bankingItems = [];
+    this.dateAdapter.setLocale('de-DE');
   }
 
   bankingItems: BankingItem[] = [];
@@ -41,7 +45,7 @@ export class PaymentViewerComponent implements OnInit {
   totalSum: number = 0;
 
   columnsToDisplay = [ 'description', 'amount', 'paymentType', 'date' ];
-  pageSizeOptions = [ 5, 10, 15, 20 ];
+  pageSizeOptions = [ 5, 10, 15, 20, 50, 100 ];
   pageSize: number = 10;
 
   ngOnInit(): void 
@@ -61,7 +65,9 @@ export class PaymentViewerComponent implements OnInit {
     let startStr = formatDate(event.start, "y-M-d", this.locale);
     let endStr = formatDate(event.end, "y-M-d", this.locale);
 
-    let uri = `http://localhost:3000/items/${startStr}/${endStr}`;
+    
+
+    let uri = `${environment.backendAddress}/items/${startStr}/${endStr}`;
 
     this.http.get<BankingItem[]>(uri).subscribe(resp => {
 

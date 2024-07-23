@@ -6,9 +6,11 @@ import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/fo
 import { MatInput } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { formatDate } from '@angular/common';
-import { FormControl, FormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { environment } from '../../environment/environment';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-payment-inserter',
@@ -30,16 +32,14 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 })
 export class PaymentInserterComponent {
 
-  amountFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern("^(?:€ *)?(\d(?:[. ,]*\d)*)(?: (?:[eE]uro|€))? *$")
-  ]);
-
   types = [ 'Bar', 'Karte', 'SEPA' ];
 
-  constructor(private http: HttpClient, @Inject(LOCALE_ID) private locale: string, public dialog: MatDialog) 
+  constructor(private http: HttpClient, 
+              @Inject(LOCALE_ID) private locale: string, 
+              public dialog: MatDialog, 
+              private dateAdapter: DateAdapter<Date>) 
   {
-
+    this.dateAdapter.setLocale('de-DE');
   }
 
   description: String = "";
@@ -56,13 +56,13 @@ export class PaymentInserterComponent {
   {
     if(this.description == "")
     {
-      this.openDialog("Beschreibung darf nicht leer sein!");
+      this.openDialog("Description cannot be empty!");
       return;
     }
 
     if(this.date == null)
     {
-      this.openDialog("Datum darf nicht leer sein!");
+      this.openDialog("Date cannot be empty!");
       return;
     }
 
@@ -75,7 +75,7 @@ export class PaymentInserterComponent {
 
     const body = JSON.stringify(data);
 
-    let uri = `http://localhost:3000/addItem`;
+    let uri = `${environment.backendAddress}/addItem`;
     this.http.put(uri, body, this.httpOptions).subscribe(_ => console.log("put: " + body));
 
   }  

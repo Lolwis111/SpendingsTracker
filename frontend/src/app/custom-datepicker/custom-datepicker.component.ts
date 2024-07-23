@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDatepickerModule, MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { D } from '@angular/cdk/keycodes';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -25,6 +24,10 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './custom-datepicker.component.scss'
 })
 export class CustomDatepickerComponent implements OnInit {
+
+  constructor(private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('de-DE');
+  }
 
   @Output() onSelection = new EventEmitter<{start: Date, end: Date}>();
 
